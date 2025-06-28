@@ -1,6 +1,10 @@
         ;store  sample data
         MOV     R8, #0x2000
 
+        ;the    gist of how this sample data is stored is that
+        ;1)     it moves various values into registers
+        ;2)     sums up all those registers
+        ;3)     stores sum into memory based on offset from R8
         MOV     R0,#0x11000000
         MOV     R1,#0x00110000
         MOV     R2,#0x00001100
@@ -8,7 +12,7 @@
         ADD     R0, R0, R1
         ADD     R0, R0, R2
         ADD     R0, R0, R3
-        STR     R0, [R8] ; 0x2000
+        STR     R0, [R8] ;0x2000
 
         MOV     R0,#0x22000000
         MOV     R1,#0x00220000
@@ -17,7 +21,7 @@
         ADD     R0, R0, R1
         ADD     R0, R0, R2
         ADD     R0, R0, R3
-        STR     R0, [R8, #4] ; 0x2004
+        STR     R0, [R8, #4] ;0x2004
 
         MOV     R0,#0x31000000
         MOV     R1,#0x00110000
@@ -26,7 +30,7 @@
         ADD     R0, R0, R1
         ADD     R0, R0, R2
         ADD     R0, R0, R3
-        STR     R0, [R8, #8] ; 0x2008
+        STR     R0, [R8, #8] ;0x2008
 
         MOV     R0,#0x42000000
         MOV     R1,#0x00220000
@@ -35,7 +39,7 @@
         ADD     R0, R0, R1
         ADD     R0, R0, R2
         ADD     R0, R0, R3
-        STR     R0, [R8, #12] ; 0x200C
+        STR     R0, [R8, #12] ;0x200C
 
         MOV     R0,#0x51000000
         MOV     R1,#0x00110000
@@ -44,7 +48,7 @@
         ADD     R0, R0, R1
         ADD     R0, R0, R2
         ADD     R0, R0, R3
-        STR     R0, [R8, #16] ; 0x2010
+        STR     R0, [R8, #16] ;0x2010
 
         MOV     R0,#0x62000000
         MOV     R1,#0x00220000
@@ -56,13 +60,13 @@
         STR     R0, [R8, #20] ;0x2014
 
 
-        ;main
-        MOV     R0, #0x2000 ;R0 = data base
-        MOV     R1, #6 ;6 data items
+        ;main   program starts here
+        MOV     R0, #0x2000 ;base data
+        MOV     R1, #6 ;counter for 6 data items
 
-        MOV     R2, #0 ;sum low
-        MOV     R3, #0 ;sum high
-        MOV     R6, #0 ;max
+        MOV     R2, #0 ;sum low 32-bit (for 1a)
+        MOV     R3, #0 ;sum high 32-bit (for 1a)
+        MOV     R6, #0 ;maximum value (for 1b)
 
 LOOP    
         LDR     R4, [R0]
