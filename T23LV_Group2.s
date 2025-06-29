@@ -130,10 +130,11 @@ SKIPMAX
          CMP     R1, #0
          BNE     LOOP
 
-         ;store  sum in 2100
+         ;store  sum in memory
+         ;sum format: [HIGH 32-BIT][LOW 32-BIT]
          MOV     R5, #0x2100
-         STR     R2, [R5]
-         STR     R3, [R5, #4]
+         STR     R2, [R5] ;sum low 32-bit is stored in 0x2100
+         STR     R3, [R5, #4] ;sum high 32-bit is stored in 0x2104
 
          ;store  max in 2150
          LDR     R5, =0x2150
